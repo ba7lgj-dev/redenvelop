@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>红包场景模拟器</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <h1 class="title">点击红包领取好运</h1>
+    <div class="envelope" id="envelope">
+      <div class="envelope-top"></div>
+      <div class="envelope-body"></div>
+      <div class="seal">福</div>
+      <div class="sparkles" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="result" id="result" role="status" aria-live="polite"></div>
+    <button class="reset" id="reset" type="button">再试一次</button>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
