@@ -3,25 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>红包场景模拟器</title>
+  <title>群聊抢红包模拟器</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="app">
-    <h1 class="title">点击红包领取好运</h1>
-    <div class="envelope" id="envelope">
-      <div class="envelope-top"></div>
-      <div class="envelope-body"></div>
-      <div class="seal">福</div>
-      <div class="sparkles" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
+  <noscript>
+    <div class="noscript">请开启JavaScript后再体验红包模拟器。</div>
+  </noscript>
+  <div class="app" role="application">
+    <header class="header">
+      <div>
+        <h1>群聊抢红包模拟器</h1>
+        <p class="subtitle">设定金额和人数，体验手气最佳与运气最差的红包大战。</p>
       </div>
-    </div>
-    <div class="result" id="result" role="status" aria-live="polite"></div>
-    <button class="reset" id="reset" type="button">再试一次</button>
+      <div class="header-style" aria-live="polite">当前红包样式：<span id="styleName">未选择</span></div>
+    </header>
+
+    <form id="configForm" class="control-panel" autocomplete="off">
+      <label class="field" for="totalAmount">
+        <span>总金额 (元)</span>
+        <input id="totalAmount" name="totalAmount" type="number" min="0.01" step="0.01" value="88.00" required>
+      </label>
+      <label class="field" for="peopleCount">
+        <span>总人数</span>
+        <input id="peopleCount" name="peopleCount" type="number" min="1" step="1" value="8" required>
+      </label>
+      <label class="field" for="styleSelect">
+        <span>红包样式</span>
+        <select id="styleSelect" name="styleSelect">
+          <option value="classic">经典福运</option>
+          <option value="royal">锦绣尊贵</option>
+          <option value="spring">春日花火</option>
+          <option value="cyber">赛博霓虹</option>
+          <option value="jade">玉润盈彩</option>
+          <option value="random">随机分配</option>
+        </select>
+      </label>
+      <button id="createBtn" type="submit" class="primary">发红包</button>
+    </form>
+
+    <section class="status-panel" aria-live="polite">
+      <div class="status-card">
+        <span class="label">本轮总金额</span>
+        <strong id="totalMoney">¥0.00</strong>
+      </div>
+      <div class="status-card">
+        <span class="label">剩余个数</span>
+        <strong><span id="remainingCount">0</span>/<span id="totalCount">0</span></strong>
+      </div>
+      <div class="status-card">
+        <span class="label">手气最佳</span>
+        <strong id="bestAmount">--</strong>
+      </div>
+      <div class="status-card">
+        <span class="label">运气最差</span>
+        <strong id="worstAmount">--</strong>
+      </div>
+      <div class="status-card">
+        <span class="label">剩余金额</span>
+        <strong id="remainingMoney">¥0.00</strong>
+      </div>
+    </section>
+
+    <main class="layout">
+      <section class="chat-column" aria-label="群聊动态">
+        <div class="chat-window" id="chatLog" aria-live="polite"></div>
+        <div class="envelope-stage">
+          <div class="envelope-wrapper">
+            <div class="envelope-3d" id="envelope" role="button" tabindex="0" aria-label="点击抢红包">
+              <div class="envelope-glow"></div>
+              <div class="envelope-top"></div>
+              <div class="envelope-body"></div>
+              <div class="envelope-seal" id="envelopeSeal">福</div>
+              <div class="envelope-letter" id="payoutDisplay">
+                <div class="letter-content">
+                  <p class="letter-title">恭喜发财</p>
+                  <p class="letter-amount" id="payoutAmount">¥0.00</p>
+                  <p class="letter-note" id="payoutNote">红包等你来抢</p>
+                </div>
+              </div>
+              <div class="envelope-confetti" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+          <div class="stage-actions">
+            <button id="grabBtn" type="button" class="accent" disabled>立即抢红包</button>
+            <p class="stage-hint" id="stageHint">请先设定金额和人数后点击“发红包”。</p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="history-column" aria-label="我的红包">
+        <h2>我的红包</h2>
+        <ul id="historyList" class="history-list"></ul>
+      </aside>
+    </main>
   </div>
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
